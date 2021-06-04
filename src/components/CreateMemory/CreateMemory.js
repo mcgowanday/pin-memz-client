@@ -9,8 +9,10 @@ import apiUrl from './../../apiConfig'
 // "Inheriting" from the Component class
 class CreateMem extends Component {
   // 2 very important methods: constructor & render
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    console.log(this.props)
 
     // UseFUL constructors set up state
     this.state = {
@@ -66,6 +68,10 @@ class CreateMem extends Component {
     axios({
       method: 'POST',
       url: `${apiUrl}/memories/`,
+      headers: {
+      // we need the user, so we have access to their token
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
       data: { memory: this.state.memory }
     })
       .then(() => {

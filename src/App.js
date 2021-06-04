@@ -11,6 +11,8 @@ import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
 import CreateMem from './components/CreateMemory/CreateMemory'
+import ViewMemz from './components/ViewMemz/ViewMemz'
+import ShowMem from './components/ShowMem/ShowMem'
 
 class App extends Component {
   constructor (props) {
@@ -69,6 +71,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/create-memz' render={() => (
             <CreateMem msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/view-memz' render={() => (
+            <ViewMemz msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/memories/:id' render={() => (
+            <ShowMem msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
