@@ -10,6 +10,8 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
+import CreateMem from './components/CreateMemory/CreateMemory'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -64,6 +66,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/create-memz' render={() => (
+            <CreateMem msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
