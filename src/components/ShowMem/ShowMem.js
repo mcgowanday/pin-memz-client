@@ -16,6 +16,7 @@ class ShowMem extends Component {
       memory: null,
       deleted: false
     }
+    console.log(this.state)
   }
 
   componentDidMount () {
@@ -35,7 +36,7 @@ class ShowMem extends Component {
     const { id } = this.props.match.params
     // axios(`${apiUrl}/books/${this.props.match.params.id}`)
     axios({
-      url: apiUrl + '/purchases/' + id,
+      url: apiUrl + '/memories/' + id,
       method: 'GET',
       // Add an authorization header
       headers: {
@@ -95,7 +96,10 @@ class ShowMem extends Component {
             <h3>{memory.title}</h3>
             <p>Date: {memory.date}</p>
             <button onClick={this.destroyMemory}>Toss This Memory</button>
-            <Link to={`/memories/${this.props.match.params.id}/edit`}>Update This Memory</Link>
+            <br/>
+            <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Update This Memory</button></Link>
+            <br/>
+            <Link to='/view-memz/'><button type="button">All Memz</button></Link>
           </div>
         ) : 'Loading...'}
       </div>

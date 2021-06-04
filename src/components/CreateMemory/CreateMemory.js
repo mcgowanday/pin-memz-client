@@ -1,6 +1,7 @@
 // Import react & destructuring the Component
 import React, { Component } from 'react'
 // import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 // Http requests
 import axios from 'axios'
@@ -76,7 +77,11 @@ class CreateMem extends Component {
     })
       .then(() => {
         this.setState({ created: true })
+        return <Redirect to="/view-memz"/>
       })
+      // .then(() => {
+      //   return <Redirect to="/view-memz"/>
+      // })
       .catch(console.error)
   }
 
