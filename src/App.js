@@ -10,9 +10,10 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
-import CreateMem from './components/CreateMemory/CreateMemory'
-import ViewMemz from './components/ViewMemz/ViewMemz'
+import CreateMem from './components/CreateMem/CreateMem'
+import IndexMemz from './components/IndexMemz/IndexMemz'
 import ShowMem from './components/ShowMem/ShowMem'
+import UpdateMem from './components/UpdateMem/UpdateMem'
 
 class App extends Component {
   constructor (props) {
@@ -73,10 +74,13 @@ class App extends Component {
             <CreateMem msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/view-memz' render={() => (
-            <ViewMemz msgAlert={this.msgAlert} user={user} />
+            <IndexMemz msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/memories/:id' render={() => (
             <ShowMem msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/memories/:id/edit' render={({ match }) => (
+            <UpdateMem match={match} msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

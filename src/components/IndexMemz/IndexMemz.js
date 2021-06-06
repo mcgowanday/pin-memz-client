@@ -8,7 +8,7 @@ import axios from 'axios'
 import apiUrl from './../../apiConfig'
 
 // IndexBooks component class
-class ViewMemz extends Component {
+class IndexMemz extends Component {
   // 2 100% required methods: render, constructor
   // constructor function will set up our state:
   constructor (props) {
@@ -99,4 +99,4 @@ class ViewMemz extends Component {
 }
 
 // NEVER FORGET
-export default ViewMemz
+export default IndexMemz

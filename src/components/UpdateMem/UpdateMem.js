@@ -1,6 +1,5 @@
 // Import react & destructuring the Component
 import React, { Component } from 'react'
-// import { Redirect } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
 // Http requests
@@ -8,35 +7,21 @@ import axios from 'axios'
 import apiUrl from './../../apiConfig'
 
 // "Inheriting" from the Component class
-class CreateMem extends Component {
+class UpdateMem extends Component {
   // 2 very important methods: constructor & render
   constructor (props) {
     super(props)
-
-    console.log(this.props)
 
     // UseFUL constructors set up state
     this.state = {
       memory: {
         title: '',
-        date: '',
-        location: ''
+        location: '',
+        date: ''
       },
-      created: false
+      updated: false
     }
   }
-
-  // "memory": {
-  //     "title": "'"${TITLE}"'",
-  //     "date": "'"${DATE}"'",
-  //     "location": "'"${LOCATION}"'",
-  //     "category": "'"${CATEGORY}"'",
-  //     "party": "'"${PARTY}"'",
-  //     "enjoyed": "'"${ENJOYED}"'",
-  //     "starred": "'"${STARRED}"'",
-  //     "notes": "'"${NOTES}"'",
-  //     "owner": "'"${OWNER}"'"
-  //   }
 
   handleChange = (event) => {
     // This is a synthetic event
@@ -58,17 +43,18 @@ class CreateMem extends Component {
       // title: 'hi', author: 'hello', title: 'hil'
       // author: 'hello', title: 'hil'
       return { memory: { ...prevState.memory, ...updatedValue } }
-      // return { book: { ...prevState.book, ...{ [name]: value } } }
+      // return { memory: { ...prevState.memory, ...{ [name]: value } } }
     })
   }
 
   handleSubmit = (event) => {
     // We want to prevent a refresh on submit of our form
     event.preventDefault()
-
+    console.log(this.props)
+    console.log(this.props.match.params)
     axios({
-      method: 'POST',
-      url: `${apiUrl}/memories/`,
+      method: 'PATCH',
+      url: `${apiUrl}/memories/${this.props.match.params.id}`,
       headers: {
       // we need the user, so we have access to their token
         'Authorization': `Bearer ${this.props.user.token}`
@@ -76,19 +62,21 @@ class CreateMem extends Component {
       data: { memory: this.state.memory }
     })
       .then(() => {
-        this.setState({ created: true })
-        return <Redirect to="/view-memz"/>
+        this.setState({ updated: true })
       })
-      // .then(() => {
-      //   return <Redirect to="/view-memz"/>
-      // })
       .catch(console.error)
   }
 
   render () {
+    // If we've update the memory (updated is true)
+    // Then we'll redirect somewhere else
+    if (this.state.updated) {
+      return <Redirect to={`/memories/${this.props.match.params.id}`}/>
+    }
+
     return (
       <div>
-        <h1>Memory Logger</h1>
+        <h1>Edit this Mem</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             name="title"
@@ -96,13 +84,13 @@ class CreateMem extends Component {
             onChange={this.handleChange}
           />
           <input
-            name="date"
-            value={this.state.memory.date}
+            name="location"
+            value={this.state.memory.location}
             onChange={this.handleChange}
           />
           <input
-            name="location"
-            value={this.state.memory.location}
+            name="date"
+            value={this.state.memory.date}
             onChange={this.handleChange}
           />
           <button type="submit">Submit</button>
@@ -112,16 +100,4 @@ class CreateMem extends Component {
   }
 }
 
-// "memory": {
-//     "title": "'"${TITLE}"'",
-//     "date": "'"${DATE}"'",
-//     "location": "'"${LOCATION}"'",
-//     "category": "'"${CATEGORY}"'",
-//     "party": "'"${PARTY}"'",
-//     "enjoyed": "'"${ENJOYED}"'",
-//     "starred": "'"${STARRED}"'",
-//     "notes": "'"${NOTES}"'",
-//     "owner": "'"${OWNER}"'"
-//   }
-
-export default CreateMem
+export default UpdateMem

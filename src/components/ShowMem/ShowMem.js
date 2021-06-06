@@ -97,7 +97,7 @@ class ShowMem extends Component {
             <p>Date: {memory.date}</p>
             <button onClick={this.destroyMemory}>Toss This Memory</button>
             <br/>
-            <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Update This Memory</button></Link>
+            <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Edit This Mem</button></Link>
             <br/>
             <Link to='/view-memz/'><button type="button">All Memz</button></Link>
           </div>
