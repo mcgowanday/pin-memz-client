@@ -1,5 +1,6 @@
 // deconstruct the `Component` class of the react library
 import React, { Component } from 'react'
+// import { Card, Button } from 'react-bootstrap'
 import { withRouter, Redirect, Link } from 'react-router-dom'
 // HTTP requests we need axios & the url
 import axios from 'axios'
@@ -79,11 +80,33 @@ class ShowMem extends Component {
       return <Redirect to="/memories"/>
     }
 
+    const ShowMemLayout = {
+      // display: 'flex',
+      // justifyContent: 'center'
+      // flexFlow: 'row wrap'
+    }
+    // const memCards = memory.map(purchase => {
+    //   return (
+    //     <Card bg="info" key={purchase._id} style={{ width: '14rem', margin: 8 }}>
+    //       {/* <Card.Img variant='top' src={purchase.backgroundUrl}/> */}
+    //       <Card.Body>
+    //         <Card.Title>{purchase.product.name}</Card.Title>
+    //         <Card.Text>ID:{purchase._id}</Card.Text>
+    //         <Card.Text>{purchase.product.description}</Card.Text>
+    //         <Card.Text>${purchase.product.price}</Card.Text>
+    //         <Link to={`/purchases/${purchase._id}`} key={purchase._id}>
+    //           <Button>View Purchase Details</Button>
+    //         </Link>
+    //       </Card.Body>
+    //     </Card>
+    //   )
+    // })
+
     // Loading & Book to Display
     console.log('State in the render: ', memory)
     return (
-      <div>
-        <h1>Memory View</h1>
+      <div style={ShowMemLayout}>
+        <h1 style={{ color: 'blue' }}>Memory:</h1>
         {/* {this.state.book && (
           <div>
             <h3>{this.state.book.title}</h3>
@@ -93,13 +116,14 @@ class ShowMem extends Component {
         {!this.state.book && 'Loading...'} */}
         {memory ? (
           <div>
-            <h3>{memory.title}</h3>
+            <h3 >{memory.title}</h3>
+            <p style={{ backgroundColor: 'lightblue' }}>Location: {memory.location}</p>
             <p>Date: {memory.date}</p>
             <button onClick={this.destroyMemory}>Toss This Memory</button>
             <br/>
             <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Edit This Mem</button></Link>
             <br/>
-            <Link to='/view-memz/'><button type="button">All Memz</button></Link>
+            <Link to='/view-memz/'><button type="button">Back to ViewMemz</button></Link>
           </div>
         ) : 'Loading...'}
       </div>
