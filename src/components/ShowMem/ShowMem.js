@@ -23,19 +23,9 @@ class ShowMem extends Component {
   componentDidMount () {
     console.log(this.props)
     console.log(this.props.match)
-    // Show request /books/:id
-    // We need to get the ID in the front-end URL
-    // I could destructure the params out of the params obj
-    // create a variable called `id` to store the value of
-    // `this.props.match.params.id`
-    // this.props is built-in in class components we always have this.props
-    // this.props.match is an object from the `Route` component
-    // which provides information about the route URL we matches
-    // match.params object contains key/value pairs
-    // for an URL params `/books/:id` < :id is the url param
-    // it's name is "id" so the params object has a key "id"
+
     const { id } = this.props.match.params
-    // axios(`${apiUrl}/books/${this.props.match.params.id}`)
+    // axios(`${apiUrl}/memories/${this.props.match.params.id}`)
     axios({
       url: apiUrl + '/memories/' + id,
       method: 'GET',
@@ -107,13 +97,6 @@ class ShowMem extends Component {
     return (
       <div style={ShowMemLayout}>
         <h1 style={{ color: '#1A7565' }}>Memory:</h1>
-        {/* {this.state.book && (
-          <div>
-            <h3>{this.state.book.title}</h3>
-            <p>Written by: {this.state.book.author}</p>
-          </div>
-        )}
-        {!this.state.book && 'Loading...'} */}
         {memory ? (
           <div>
             <h3 style={{ backgroundColor: 'lightblue' }}>{memory.title}</h3>

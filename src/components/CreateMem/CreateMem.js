@@ -45,10 +45,7 @@ class CreateMem extends Component {
     this.setState((prevState) => {
       const name = event.target.name
       const value = event.target.value
-      // The spread operator! It spreads stuff
-      // Spreads data out of data structures
-      // ...[1, 2, 3] => 1, 2, 3
-      // ...{ title: 'hi', author: 'hello' } => title: 'hi', author: 'hello'
+
       const updatedValue = { [name]: value } // => title: 'hil'
       // title: 'hi', author: 'hello', title: 'hil'
       // author: 'hello', title: 'hil'
@@ -116,7 +113,7 @@ class CreateMem extends Component {
     }
 
     return (
-      <Card bg="light" border="secondary" style={{ width: '72rem', margin: 16 }}>
+      <Card bg="light" border="secondary" style={{ width: '72rem', margin: 8 }}>
         <Card.Header as="h3">Memory Logger</Card.Header>
         <Card.Body>
           <Card.Title>Create New Mem!</Card.Title>
