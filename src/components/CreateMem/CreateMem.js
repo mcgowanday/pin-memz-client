@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 // import { Redirect } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
-import { Form, Button, Col } from 'react-bootstrap'
+import { Card, Form, Button, Col } from 'react-bootstrap'
 
 // Http requests
 import axios from 'axios'
@@ -20,27 +20,20 @@ class CreateMem extends Component {
     this.state = {
       memory: {
         title: '',
+        date: '',
         location: '',
-        date: ''
-        // enjoyed: ''
+        party: '',
+        category: '',
+        enjoyed: false,
+        starred: false,
+        notes: ''
       },
       created: false
     }
   }
 
-  // "memory": {
-  //     "title": "'"${TITLE}"'",
-  //     "date": "'"${DATE}"'",
-  //     "location": "'"${LOCATION}"'",
-  //     "category": "'"${CATEGORY}"'",
-  //     "party": "'"${PARTY}"'",
-  //     "enjoyed": "'"${ENJOYED}"'",
-  //     "starred": "'"${STARRED}"'",
-  //     "notes": "'"${NOTES}"'",
-  //     "owner": "'"${OWNER}"'"
-  //   }
-
   handleChange = (event) => {
+    // console.log(this.state)
     // This is a synthetic event
     // Synthetic events will get the target and other values
     // "nullified" in a callback
@@ -62,6 +55,25 @@ class CreateMem extends Component {
       return { memory: { ...prevState.memory, ...updatedValue } }
       // return { book: { ...prevState.book, ...{ [name]: value } } }
     })
+  }
+
+  // handleToggle () {
+  //   this.setState({ checkboxChecked: !this.state.checkboxChecked });
+  // }
+
+  handleCheckBoxChange = (event) => {
+    // const enjoyed = event.target.name
+    event.persist()
+    console.log(event)
+    console.log(this.state)
+    // const { enjoyed } = this.state
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        enjoyed: !prevState.enjoyed
+      }
+    })
+    console.log(this.state)
   }
 
   handleSubmit = (event) => {
@@ -96,7 +108,7 @@ class CreateMem extends Component {
   // }
 
   render () {
-    const { created } = this.state
+    const { memory, created } = this.state
 
     // If Mem created equals 'true', redirect to view memz page
     if (created) {
@@ -104,120 +116,123 @@ class CreateMem extends Component {
     }
 
     return (
-      // <div>
-      //   <h1>Memory Logger</h1>
-      //   // <form onSubmit={this.handleSubmit}>
-      //   //   <input
-      //   //     name="title"
-      //   //     placeholder="Enter Mem Title"
-      //   //     value={this.state.memory.title}
-      //   //     onChange={this.handleChange}
-      //   //   />
-      //   //   <input
-      //   //     name="location"
-      //   //     value={this.state.memory.location}
-      //   //     onChange={this.handleChange}
-      //   //   />
-      //   //   <input
-      //   //     name="date"
-      //   //     value={this.state.memory.date}
-      //   //     onChange={this.handleChange}
-      //   //   />
-      //   //   <button type="submit">Submit</button>
-      //   // </form>
-      //   // <br/>
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridTitle">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="title"
-              value={this.state.title}
-              placeholder="Enter Mem Title"
-              onChange={this.handleChange}/>
-          </Form.Group>
+      <Card bg="light" border="secondary" style={{ width: '72rem', margin: 16 }}>
+        <Card.Header as="h3">Memory Logger</Card.Header>
+        <Card.Body>
+          <Card.Title>Create New Mem!</Card.Title>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Row>
+              <Form.Group as={Col} controlId="Title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="title"
+                  value={this.state.title}
+                  placeholder="Enter Mem Title"
+                  onChange={this.handleChange}/>
+              </Form.Group>
 
-          <Form.Group as={Col} controlId="date">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="date"
-              value={this.state.date}
-              placeholder="e.g. '1234 Poplar St' or 'The Zemskys House'"
-              onChange={this.handleChange}/>
-          </Form.Group>
-        </Form.Row>
+              <Form.Group as={Col} controlId="FormGridDate">
+                <Form.Label>Date</Form.Label>
+                <Form.Control
+                  required
+                  type="date"
+                  name="date"
+                  value={this.state.date}
+                  placeholder=" "
+                  onChange={this.handleChange}/>
+              </Form.Group>
+            </Form.Row>
 
-        <Form.Group controlId="memory.Location">
-          <Form.Label>Location</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="location"
-            value={this.state.location}
-            placeholder="e.g. '1234 Poplar St' or 'The Zemskys House'"
-            onChange={this.handleChange}/>
-        </Form.Group>
+            <Form.Row>
+              <Form.Group as={Col} controlId="memory.Location">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="location"
+                  value={this.state.location}
+                  placeholder="e.g. '1234 Poplar St' , 'The Swimming Hole' , 'Dave's Apartment'"
+                  onChange={this.handleChange}/>
+              </Form.Group>
+              <Form.Group as={Col} controlId="memory.Category">
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  as="select"
+                  defaultValue="Select..."
+                  type="text"
+                  name="category"
+                  value={this.state.category}
+                  onChange={this.handleChange}>
+                  <option>Select...</option>
+                  <option>Concert</option>
+                  <option>Dinner</option>
+                  <option>Drinks</option>
+                  <option>Exercise</option>
+                  <option>Game</option>
+                  <option>Lunch</option>
+                  <option>Movie</option>
+                  <option>Party</option>
+                  <option>Performance</option>
+                  <option>Purchase</option>
+                  <option>Sporting Event</option>
+                  <option>Work</option>
+                  <option>Other</option>
+                </Form.Control>
+              </Form.Group>
+            </Form.Row>
 
-        <Form.Group controlId="formGridParty">
-          <Form.Label>Party</Form.Label>
-          <Form.Control placeholder=" e.g. 'Mike, Eron, Beth, Ben, Alex, Timm' " />
-          <Form.Text className="text-muted">
-    Who you made this memory with!
-          </Form.Text>
-        </Form.Group>
+            <Form.Group controlId="memory.Party">
+              <Form.Label>Party</Form.Label>
+              <Form.Control
+                type="text"
+                name="party"
+                value={this.state.party}
+                placeholder=" e.g. 'Mike, Eron, Beth, Ben, Alex, Timm' "
+                onChange={this.handleChange}/>
+              <Form.Text className="text-muted">
+        Who you made this memory with!
+              </Form.Text>
+            </Form.Group>
 
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
-            <Form.Control />
-          </Form.Group>
+            <Form.Group id="formGridCheckbox">
+              <Form.Check
+                aria-label="option 1"
+                type="checkbox"
+                label="This is a Special Mem"
+                name="starred"
+                value={this.state.starred}
+                onChange={this.handleCheckBoxChange}/>
+              <Form.Check
+                aria-label="option 1"
+                type="checkbox"
+                label="This a Bad Mem"
+                name="enjoyed"
+                value={memory.enjoyed}
+                onChange={this.handleCheckBoxChange}/>
+            </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>State</Form.Label>
-            <Form.Control as="select" defaultValue="Choose...">
-              <option>Choose...</option>
-              <option>...</option>
-            </Form.Control>
-          </Form.Group>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Notes</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                type="text"
+                name="notes"
+                value={this.state.notes}
+                placeholder=" Enter notes here... "
+                onChange={this.handleChange}/>
+            </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control />
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Group id="formGridCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Notes</Form.Label>
-          <Form.Control as="textarea" rows={3} />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      // </div>
+            <Button variant="secondary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     )
   }
 }
-
-// "memory": {
-//     "title": "'"${TITLE}"'",
-//     "date": "'"${DATE}"'",
-//     "location": "'"${LOCATION}"'",
-//     "category": "'"${CATEGORY}"'",
-//     "party": "'"${PARTY}"'",
-//     "enjoyed": "'"${ENJOYED}"'",
-//     "starred": "'"${STARRED}"'",
-//     "notes": "'"${NOTES}"'",
-//     "owner": "'"${OWNER}"'"
-//   }
 
 export default CreateMem

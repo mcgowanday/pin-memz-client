@@ -1,0 +1,25 @@
+// overwrite theme variables
+
+//quick test,
+
+// $primary: #122F40;
+$primary: #1c4259;
+$secondary: #1A7565;
+// $secondary: #bfddb6;
+// $secondary: #6ed169;
+// $secondary: #46d63e;
+// $success: #8de814;
+$success: #1cf40f;
+// $success: #34cb2b;
+$info: #79B361;
+$light: #bfddb6;
+
+$mcgowanscolor: #8de814;
+
+.card {
+  background-color: red
+}
+
+
+
+@import '~bootstrap/scss/bootstrap';

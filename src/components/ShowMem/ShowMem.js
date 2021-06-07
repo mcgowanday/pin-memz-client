@@ -106,7 +106,7 @@ class ShowMem extends Component {
     console.log('State in the render: ', memory)
     return (
       <div style={ShowMemLayout}>
-        <h1 style={{ color: 'blue' }}>Memory:</h1>
+        <h1 style={{ color: '#1A7565' }}>Memory:</h1>
         {/* {this.state.book && (
           <div>
             <h3>{this.state.book.title}</h3>
@@ -116,10 +116,12 @@ class ShowMem extends Component {
         {!this.state.book && 'Loading...'} */}
         {memory ? (
           <div>
-            <h3 >{memory.title}</h3>
-            <p style={{ backgroundColor: 'lightblue' }}>Location: {memory.location}</p>
+            <h3 style={{ backgroundColor: 'lightblue' }}>{memory.title}</h3>
+            <p>Location: {memory.location}</p>
+            <p>Category: {memory.category}</p>
+            <p style={{ backgroundColor: 'lightblue' }}>Notes: {memory.notes}</p>
             <p>Date: {memory.date}</p>
-            <button onClick={this.destroyMemory}>Toss This Memory</button>
+            <Link to='/view-memz/' onClick={this.destroyMemory}><button>Delete This Mem</button></Link>
             <br/>
             <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Edit This Mem</button></Link>
             <br/>
