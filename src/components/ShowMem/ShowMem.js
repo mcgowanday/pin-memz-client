@@ -101,8 +101,11 @@ class ShowMem extends Component {
           <div>
             <h3 style={{ backgroundColor: 'lightblue' }}>{memory.title}</h3>
             <p>Location: {memory.location}</p>
-            <p>Category: {memory.category}</p>
+            <p style={{ backgroundColor: 'lightblue' }}>Category: {memory.category}</p>
+            <p>Party: {memory.party}</p>
             <p style={{ backgroundColor: 'lightblue' }}>Notes: {memory.notes}</p>
+            <p>Enjoyed: {memory.enjoyed}</p>
+            <p style={{ backgroundColor: 'lightblue' }}>Starred: {memory.starred}</p>
             <p>Date: {memory.date}</p>
             <Link to='/view-memz/' onClick={this.destroyMemory}><button>Delete This Mem</button></Link>
             <br/>

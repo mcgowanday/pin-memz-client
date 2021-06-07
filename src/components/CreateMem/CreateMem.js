@@ -24,7 +24,7 @@ class CreateMem extends Component {
         location: '',
         party: '',
         category: '',
-        enjoyed: false,
+        enjoyed: true,
         starred: false,
         notes: ''
       },
@@ -58,19 +58,33 @@ class CreateMem extends Component {
   //   this.setState({ checkboxChecked: !this.state.checkboxChecked });
   // }
 
+  // handleCheckBoxChange = (event) => {
+  //   // const enjoyed = event.target.name
+  //   event.persist()
+  //   console.log(event)
+  //   console.log(this.state)
+  //   // const { enjoyed } = this.state
+  //   this.setState((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       enjoyed: !prevState.enjoyed
+  //     }
+  //   })
+  //   console.log(this.state)
+  // }
+
   handleCheckBoxChange = (event) => {
-    // const enjoyed = event.target.name
     event.persist()
-    console.log(event)
-    console.log(this.state)
-    // const { enjoyed } = this.state
     this.setState((prevState) => {
-      return {
-        ...prevState,
-        enjoyed: !prevState.enjoyed
-      }
+      const name = event.target.name
+      const value = event.target.checked
+
+      const updatedValue = { [name]: value } // => title: 'hil'
+      // title: 'hi', author: 'hello', title: 'hil'
+      // author: 'hello', title: 'hil'
+      return { memory: { ...prevState.memory, ...updatedValue } }
+      // return { book: { ...prevState.book, ...{ [name]: value } } }
     })
-    console.log(this.state)
   }
 
   handleSubmit = (event) => {
@@ -199,14 +213,14 @@ class CreateMem extends Component {
                 type="checkbox"
                 label="This is a Special Mem"
                 name="starred"
-                value={this.state.starred}
+                checked={memory.starred}
                 onChange={this.handleCheckBoxChange}/>
               <Form.Check
                 aria-label="option 1"
                 type="checkbox"
                 label="This a Bad Mem"
                 name="enjoyed"
-                value={memory.enjoyed}
+                checked={memory.enjoyed}
                 onChange={this.handleCheckBoxChange}/>
             </Form.Group>
 
