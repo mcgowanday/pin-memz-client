@@ -1,14 +1,13 @@
 // deconstruct the `Component` class of the react library
-import React, { Component } from 'react'
+import React, { Component, Link } from 'react'
+// import Card from 'react-bootstrap/Card'
+import { Card, Button } from 'react-bootstrap'
 // import { Card, Button } from 'react-bootstrap'
-import { withRouter, Redirect, Link } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 // HTTP requests we need axios & the url
-import { Button, Card } from 'react-bootstrap'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
 import { memDelete } from '../../api/memory'
-
-let particularMem = false
 
 class ShowMem extends Component {
   // 2 very important methods: constructor, render
@@ -66,7 +65,6 @@ class ShowMem extends Component {
 
   render () {
     const { memory, deleted } = this.state
-    console.log(memory)
 
     // With a redirect
     // We might decide to return just the redirect by itself
@@ -96,29 +94,14 @@ class ShowMem extends Component {
     //   )
     // })
 
-    if (memory === null) {
-      particularMem = false
-    } else if (memory.starred === true || memory.enjoyed === true) {
-      particularMem = true
-    } else {
-      particularMem = false
-    }
-
-    // } || memory.starred === true) {
-    //   particularMem = true
-    // } else {
-    //   particularMem = false
-    // }
-
     // Loading & Book to Display
-    console.log(particularMem)
     console.log('State in the render: ', memory)
     return (
       <div style={ShowMemLayout}>
         <h1 style={{ color: '#1A7565' }}>Memory:</h1>
         {memory ? (
           <div>
-            <Card id="cream" border="secondary">
+            <Card border="secondary">
               <Card.Header>
                 <Card.Title>
                   {memory.title}
@@ -126,30 +109,24 @@ class ShowMem extends Component {
               </Card.Header>
               <Card.Body>
                 <Card.Subtitle>Location: {memory.location} </Card.Subtitle>
-                <ul></ul>
+                <br></br>
                 <Card.Subtitle>Date: {memory.date} </Card.Subtitle>
-                <br></br>
-                <Card.Subtitle>Details: </Card.Subtitle>
-                <ul>
-                  <li>Category: {memory.category}</li>
-                  <li>Group: {memory.party}</li>
-                </ul>
-                <Card.Subtitle>{memory.notes === '' ? null : 'Notes: '}</Card.Subtitle>
-                {memory.notes === '' ? null : <ul><li>{memory.notes}</li></ul>}
-                <br></br>
-                <Card.Subtitle>{particularMem ? 'Notable Memory: This is a ' : null } {memory.starred ? 'GREAT Mem' : null} {memory.enjoyed ? 'BAD Mem' : null}</Card.Subtitle>
-                {/* comment here */}
+                <br />
+                <Card.Subtitle>Category:  {memory.category} </Card.Subtitle>
+                <Card.Subtitle>Category:        {memory.category} </Card.Subtitle>
+                <ul></ul>
+                <Card.Subtitle>Notes:  {memory.notes} </Card.Subtitle>
               </Card.Body>
-            </Card>{'  '}
-            <Button href={`/memories/${this.props.match.params.id}/edit`} variant="light">Edit this Mem</Button>{'  '}
-            <Button href="#/view-memz/" onClick={this.destroyMemory} variant="outline-secondary">Delete This Mem</Button>{' '}
+            </Card>
+            <Button href="#/view-memz/">Delete This Mem</Button> <Button type="submit">Delete This Mem</Button>{' '}
+            <Button href="#/view-memz/">Delete This Mem</Button> <Button type="submit">Delete This Mem</Button>{' '}
             <Link to='/view-memz/' onClick={this.destroyMemory}><button>Delete This Mem</button></Link>
             <br/>
             <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Edit This Mem</button></Link>
             <br/>
             <Link to='/view-memz/'><button type="button">Back to ViewMemz</button></Link>
           </div>
-        ) : 'Unable to load Memory'}
+        ) : 'Loading...'}
       </div>
     )
   }

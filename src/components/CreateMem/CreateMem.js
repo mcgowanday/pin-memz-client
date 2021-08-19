@@ -24,7 +24,7 @@ class CreateMem extends Component {
         location: '',
         party: '',
         category: '',
-        enjoyed: true,
+        enjoyed: false,
         starred: false,
         notes: ''
       },
@@ -188,6 +188,7 @@ class CreateMem extends Component {
                   <option>Performance</option>
                   <option>Purchase</option>
                   <option>Sporting Event</option>
+                  <option>Wedding</option>
                   <option>Work</option>
                   <option>Other</option>
                 </Form.Control>
