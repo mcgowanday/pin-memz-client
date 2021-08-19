@@ -120,10 +120,12 @@ class CreateMem extends Component {
 
   render () {
     const { memory, created } = this.state
+    const { id } = this.props
+    console.log(this.props)
 
     // If Mem created equals 'true', redirect to view memz page
     if (created) {
-      return <Redirect to="view-memz"/>
+      return <Redirect to={'/view-memz/' + { id }}/>
     }
 
     return (
@@ -178,6 +180,7 @@ class CreateMem extends Component {
                   onChange={this.handleChange}>
                   <option>Select...</option>
                   <option>Concert</option>
+                  <option>Conversation</option>
                   <option>Dinner</option>
                   <option>Drinks</option>
                   <option>Exercise</option>
@@ -196,7 +199,7 @@ class CreateMem extends Component {
             </Form.Row>
 
             <Form.Group controlId="memory.Party">
-              <Form.Label>Party</Form.Label>
+              <Form.Label>Group</Form.Label>
               <Form.Control
                 type="text"
                 name="party"
@@ -212,14 +215,14 @@ class CreateMem extends Component {
               <Form.Check
                 aria-label="option 1"
                 type="checkbox"
-                label="This is a Special Mem"
+                label="Great Mem"
                 name="starred"
                 checked={memory.starred}
                 onChange={this.handleCheckBoxChange}/>
               <Form.Check
                 aria-label="option 1"
                 type="checkbox"
-                label="This a Bad Mem"
+                label="Bad Mem"
                 name="enjoyed"
                 checked={memory.enjoyed}
                 onChange={this.handleCheckBoxChange}/>

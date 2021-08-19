@@ -1,7 +1,7 @@
 // deconstruct the `Component` class of the react library
 import React, { Component } from 'react'
 // import { Card, Button } from 'react-bootstrap'
-import { withRouter, Redirect, Link } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 // HTTP requests we need axios & the url
 import { Button, Card } from 'react-bootstrap'
 import axios from 'axios'
@@ -115,7 +115,7 @@ class ShowMem extends Component {
     console.log('State in the render: ', memory)
     return (
       <div style={ShowMemLayout}>
-        <h1 style={{ color: '#1A7565' }}>Memory:</h1>
+        <h1 style={{ color: '#1A7565' }}>View Mem</h1>
         {memory ? (
           <div>
             <Card id="cream" border="secondary">
@@ -140,14 +140,11 @@ class ShowMem extends Component {
                 <Card.Subtitle>{particularMem ? 'Notable Memory: This is a ' : null } {memory.starred ? 'GREAT Mem' : null} {memory.enjoyed ? 'BAD Mem' : null}</Card.Subtitle>
                 {/* comment here */}
               </Card.Body>
-            </Card>{'  '}
-            <Button href={`/memories/${this.props.match.params.id}/edit`} variant="light">Edit this Mem</Button>{'  '}
-            <Button href="#/view-memz/" onClick={this.destroyMemory} variant="outline-secondary">Delete This Mem</Button>{' '}
-            <Link to='/view-memz/' onClick={this.destroyMemory}><button>Delete This Mem</button></Link>
-            <br/>
-            <Link to={`/memories/${this.props.match.params.id}/edit`}><button type="button">Edit This Mem</button></Link>
-            <br/>
-            <Link to='/view-memz/'><button type="button">Back to ViewMemz</button></Link>
+            </Card>
+            <ul></ul>
+            <Button href={`#/memories/${this.props.match.params.id}/edit`} variant="light">Edit this Mem</Button>{'  '}
+            <Button href="#/view-memz/" onClick={this.destroyMemory} variant="light">Delete This Mem</Button>{' '}
+            <Button href="#/view-memz/" variant="light">Back to ViewMemz</Button>{' '}
           </div>
         ) : 'Unable to load Memory'}
       </div>

@@ -91,7 +91,7 @@ class IndexMemz extends Component {
     console.log('State in the render is: ', this.state)
     return (
       <Fragment>
-        <h1>Index Memz Page</h1>
+        <h1>View Memz Page</h1>
         {memoryJsx}
       </Fragment>
     )
