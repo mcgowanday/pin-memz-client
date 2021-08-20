@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import { Card, Button } from 'react-bootstrap'
 import { withRouter, Redirect } from 'react-router-dom'
 // HTTP requests we need axios & the url
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Spinner } from 'react-bootstrap'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
 import { memDelete } from '../../api/memory'
@@ -146,7 +146,7 @@ class ShowMem extends Component {
             <Button href="#/view-memz/" onClick={this.destroyMemory} variant="light">Delete This Mem</Button>{' '}
             <Button href="#/view-memz/" variant="light">Back to ViewMemz</Button>{' '}
           </div>
-        ) : 'Unable to load Memory'}
+        ) : <Spinner animation="border" variant="secondary" />}
       </div>
     )
   }

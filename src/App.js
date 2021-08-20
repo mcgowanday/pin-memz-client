@@ -14,6 +14,7 @@ import CreateMem from './components/CreateMem/CreateMem'
 import IndexMemz from './components/IndexMemz/IndexMemz'
 import ShowMem from './components/ShowMem/ShowMem'
 import UpdateMem from './components/UpdateMem/UpdateMem'
+import Home from './components/Home/Home'
 
 class App extends Component {
   constructor (props) {
@@ -64,6 +65,11 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
+          <Route exact path='/'
+            render={() => (
+              <Home msgAlert={this.msgAlert} setUser={this.setUser} />
+            )}
+          />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />

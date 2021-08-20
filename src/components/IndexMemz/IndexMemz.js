@@ -91,7 +91,7 @@ class IndexMemz extends Component {
     console.log('State in the render is: ', this.state)
     return (
       <Fragment>
-        <h1>View Memz Page</h1>
+        <h1 style={{ color: '#1A7565' }}>ViewMemz</h1>
         {memoryJsx}
       </Fragment>
     )
