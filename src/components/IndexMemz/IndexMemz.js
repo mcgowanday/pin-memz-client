@@ -2,10 +2,13 @@
 // class from the react Library
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { Card } from 'react-bootstrap'
 // bring in the axios library from the package
 import axios from 'axios'
 // Bring in the 'apiUrl' value
 import apiUrl from './../../apiConfig'
+
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
 // IndexBooks component class
 class IndexMemz extends Component {
@@ -62,6 +65,7 @@ class IndexMemz extends Component {
   // includes the component "mounts"
   // render is a lifecycle method
   render () {
+    console.log('the memz', this.state.memories)
     // Define temporary variable to hold JSX
     let memoryJsx = ''
     // Loading state
@@ -78,15 +82,15 @@ class IndexMemz extends Component {
     } else {
       // Here's your books state
       // have to use .map because you need it to return something
-      memoryJsx = (
-        <ul>
-          {this.state.memories.map(memory => (
-            <li key={memory._id}>
-              <Link to={`/memories/${memory._id}`}>{memory.title}</Link>
-            </li>
-          ))}
-        </ul>
-      )
+      memoryJsx =
+          this.state.memories.map(memory => (
+            <Card key={memory._id} style={{ marginBottom: 8 }}>
+              <Card.Body style={{ display: 'flex', paddingTop: 12, paddingBottom: 12, justifyContent: 'space-between' }}>
+                <Link to={`/memories/${memory._id}`}>{memory.title}</Link>
+                <p style={{ marginBottom: 0 }}> {new Date(memory.date).toLocaleString('en-US', options)} </p>
+              </Card.Body>
+            </Card>
+          ))
     }
     console.log('State in the render is: ', this.state)
     return (
