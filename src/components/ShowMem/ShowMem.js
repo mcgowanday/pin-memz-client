@@ -96,6 +96,8 @@ class ShowMem extends Component {
     //   )
     // })
 
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+
     if (memory === null) {
       particularMem = false
     } else if (memory.starred === true || memory.enjoyed === true) {
@@ -127,7 +129,7 @@ class ShowMem extends Component {
               <Card.Body>
                 <Card.Subtitle>Location: {memory.location} </Card.Subtitle>
                 <ul></ul>
-                <Card.Subtitle>Date: {memory.date} </Card.Subtitle>
+                <Card.Subtitle>Date: {new Date(memory.date).toLocaleString('en-US', options)} </Card.Subtitle>
                 <br></br>
                 <Card.Subtitle>Details: </Card.Subtitle>
                 <ul>
