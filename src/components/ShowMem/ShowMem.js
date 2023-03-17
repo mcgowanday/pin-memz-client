@@ -36,13 +36,22 @@ class ShowMem extends Component {
       headers: {
       // we need the user, so we have access to their token
         'Authorization': `Bearer ${this.props.user.token}`
+      },
+      populate: {
+        path: 'owner',
+        select: 'email'
       }
     })
       .then(res => {
-        this.setState({ memory: res.data.memory })
+        this.setState({ memory: res.data.memory, email: res.data.memory.owner.email })
       })
       .catch(console.error)
   }
+
+  // .then(res => {
+  //   this.setState({ memory: res.data.memory })
+  // })
+  // .catch(console.error)
 
   destroyMemory = (event) => {
     const { user, match } = this.props
@@ -65,7 +74,7 @@ class ShowMem extends Component {
   }
 
   render () {
-    const { memory, deleted } = this.state
+    const { memory, deleted, email } = this.state
     console.log(memory)
 
     // With a redirect
@@ -95,6 +104,8 @@ class ShowMem extends Component {
     //     </Card>
     //   )
     // })
+
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
     if (memory === null) {
       particularMem = false
@@ -127,7 +138,7 @@ class ShowMem extends Component {
               <Card.Body>
                 <Card.Subtitle>Location: {memory.location} </Card.Subtitle>
                 <ul></ul>
-                <Card.Subtitle>Date: {memory.date} </Card.Subtitle>
+                <Card.Subtitle>Date: {new Date(memory.date).toLocaleString('en-US', options)} </Card.Subtitle>
                 <br></br>
                 <Card.Subtitle>Details: </Card.Subtitle>
                 <ul>
@@ -137,8 +148,10 @@ class ShowMem extends Component {
                 <Card.Subtitle>{memory.notes === '' ? null : 'Notes: '}</Card.Subtitle>
                 {memory.notes === '' ? null : <ul><li>{memory.notes}</li></ul>}
                 <br></br>
-                <Card.Subtitle>{particularMem ? 'Notable Memory: This is a ' : null } {memory.starred ? 'GREAT Mem' : null} {memory.enjoyed ? 'BAD Mem' : null}</Card.Subtitle>
+                <Card.Subtitle ><span>&#9733;</span> {/* Unicode star symbol */}{particularMem ? 'This is a ' : null } {memory.starred ? 'GREAT Mem' : null} {memory.enjoyed ? 'BAD Mem' : null}</Card.Subtitle>
                 {/* comment here */}
+                <br></br>
+                <Card.Subtitle>Mem Owner: {email}</Card.Subtitle>
               </Card.Body>
             </Card>
             <ul></ul>
